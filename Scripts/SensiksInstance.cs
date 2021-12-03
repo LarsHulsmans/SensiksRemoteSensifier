@@ -285,4 +285,52 @@ public class SensiksInstance : MonoBehaviour
         SensiksManager.SetLightColor(pos, rValue, gValue, bValue, 0);
         //Debug.Log("Lightpanel: " + pos.ToString() + " R:" + rValue + " G:" + gValue + " B:" + bValue);
     }
+
+    public void ResetEverything()
+    {
+        stashedValues.Clear();
+
+        heaterFront.value = 0;
+        heaterLeft.value = 0;
+        heaterRight.value = 0;
+        heaterRearLeft.value = 0;
+        heaterRearRight.value = 0;
+        podviewActuators.SetHeaterItensity(HeaterPosition.FRONT, 0);
+        podviewActuators.SetHeaterItensity(HeaterPosition.LEFT, 0);
+        podviewActuators.SetHeaterItensity(HeaterPosition.RIGHT, 0);
+        podviewActuators.SetHeaterItensity(HeaterPosition.SEAT_LEFT, 0);
+        podviewActuators.SetHeaterItensity(HeaterPosition.SEAT_RIGHT, 0);
+
+        fanFrontLeft.value = 0;
+        fanFrontRight.value = 0;
+        fanRearLeft.value = 0;
+        fanRearRight.value = 0;
+        podviewActuators.SetFanIntensity(FanPosition.FRONT_LEFT, 0);
+        podviewActuators.SetFanIntensity(FanPosition.FRONT_RIGHT, 0);
+        podviewActuators.SetFanIntensity(FanPosition.REAR_LEFT, 0);
+        podviewActuators.SetFanIntensity(FanPosition.REAR_RIGHT, 0);
+
+        scentGrass.value = 0;
+        scentMetal.value = 0;
+        scentMistySwamp.value = 0;
+        scentReptile.value = 0;
+        scentSea.value = 0;
+        scentSmoke.value = 0;
+
+        lightpanelLeft.rValue = 0;
+        lightpanelLeft.gValue = 0;
+        lightpanelLeft.bValue = 0;
+        lightpanelRight.rValue = 0;
+        lightpanelRight.gValue = 0;
+        lightpanelRight.bValue = 0;
+        podviewActuators.SetLightPanelColor(LightPanelPosition.LEFT,0, 0, 0);
+        podviewActuators.SetLightPanelColor(LightPanelPosition.RIGHT, 0, 0, 0);
+
+        ceilingActuator.animation = CeilingAnimation.OFF;
+        podviewActuators.SetCeilingAnimation(CeilingAnimation.OFF);
+
+        SensiksManager.ResetActuators();
+
+
+    }
 }

@@ -54,6 +54,7 @@ public class ScenesManager : MonoBehaviour
 
     public void SetMenuScene()
     {
+        EverythingOff();
         if(currentScene != null && currentScene != menuScene)
         {
             currentScene.SetActiveNoInvoke(false);
@@ -72,6 +73,7 @@ public class ScenesManager : MonoBehaviour
 
     public void SetGameScene()
     {
+        EverythingOff();
         if (currentScene != null && currentScene != gameScene)
         {
             currentScene.SetActiveNoInvoke(false);
@@ -86,8 +88,6 @@ public class ScenesManager : MonoBehaviour
 
         fanFrontLeft.slider.value = 50;
         fanFrontRight.slider.value = 50;
-
-
 
         lightPanels.SetColor(0.88f,0.007f, 0.34f);
     }
