@@ -6,9 +6,9 @@ using Sensiks.SDK.Shared.SensiksDataTypes;
 public class LightPanelsManager : MonoBehaviour
 {
     [SerializeField]
-    private ColorPicker leftPicker;
+    public ColorPicker leftPicker;
     [SerializeField]
-    private ColorPicker rightPicker;
+    public ColorPicker rightPicker;
 
     private bool linked;
 

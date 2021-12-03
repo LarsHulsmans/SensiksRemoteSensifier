@@ -68,7 +68,8 @@ public class ScenesManager : MonoBehaviour
 
         ceilingButtons.SetCeilingAnimation((int)CeilingAnimation.SKY);
 
-        lightPanels.SetColor(0.23f, 0.85f, 1f);
+        ///lightPanels.SetColor(0.23f, 0.85f, 1f);
+        StartCoroutine(interpolateLights(1, 0.23f, 0.85f, 1f));
     }
 
     public void SetGameScene()
@@ -89,7 +90,39 @@ public class ScenesManager : MonoBehaviour
         fanFrontLeft.slider.value = 50;
         fanFrontRight.slider.value = 50;
 
-        lightPanels.SetColor(0.88f,0.007f, 0.34f);
+        //lightPanels.SetColor(0.88f,0.007f, 0.34f);
+        StartCoroutine(interpolateLights(1, 0.88f, 0.007f, 0.34f));
+    }
+
+    private IEnumerator interpolateLights(float time, float r, float g, float b)
+    {
+        float rfrom = lightPanels.leftPicker.CurrentColor.r;
+        float gfrom = lightPanels.leftPicker.CurrentColor.g;
+        float bfrom = lightPanels.leftPicker.CurrentColor.b;
+
+        Debug.Log(string.Format("COLOR: {0} {1} {2}", rfrom, gfrom, bfrom));
+
+        float waitTime = time;
+        float elapsedTime = 0;
+
+        float currR, currG, currB;
+
+        while (elapsedTime < waitTime)
+        {
+
+            float elap = (elapsedTime / waitTime);
+            currR = Mathf.Lerp(rfrom, r, elap);
+            currG = Mathf.Lerp(gfrom, g, elap);
+            currB = Mathf.Lerp(bfrom, b, elap);
+
+            lightPanels.SetColor(currR, currG, currB);
+            elapsedTime += Time.deltaTime;
+
+            // Yield here
+            yield return null;
+            lightPanels.SetColor(r, g, b);
+        }
+
     }
 
     private void EverythingOff()
@@ -114,7 +147,7 @@ public class ScenesManager : MonoBehaviour
 
         ceilingButtons.SetCeilingAnimation((int)CeilingAnimation.OFF);
 
-        lightPanels.SetColor(0, 0, 0);
+        //lightPanels.SetColor(0, 0, 0);
     }
 
 }
