@@ -81,41 +81,42 @@ public class ScenesManager : MonoBehaviour
         }
         currentScene = gameScene;
 
-        heaterLeft.slider.value = 20;
-        heaterRight.slider.value = 20;
-        heaterRearRight.slider.value = 20;
-        heaterRearLeft.slider.value = 20;
-        heaterFront.slider.value = 20;
+        heaterLeft.slider.value = 0;
+        heaterRight.slider.value = 0;
+        heaterRearRight.slider.value = 0;
+        heaterRearLeft.slider.value = 0;
+        heaterFront.slider.value = 0;
 
-        fanFrontLeft.slider.value = 50;
-        fanFrontRight.slider.value = 50;
+        fanFrontLeft.slider.value = 70;
+        fanFrontRight.slider.value = 70;
+
+        ceilingButtons.SetCeilingAnimation((int)CeilingAnimation.STARS);
 
         //lightPanels.SetColor(0.88f,0.007f, 0.34f);
-        StartCoroutine(interpolateLights(1, 0.88f, 0.007f, 0.34f));
+        StartCoroutine(interpolateLights(1, 0.88f, 0.2f, 0.4f));
     }
+
 
     private IEnumerator interpolateLights(float time, float r, float g, float b)
     {
         float rfrom = lightPanels.leftPicker.CurrentColor.r;
         float gfrom = lightPanels.leftPicker.CurrentColor.g;
         float bfrom = lightPanels.leftPicker.CurrentColor.b;
+        Color fromColor = new Color(rfrom, gfrom, bfrom);
+        Color toColor = new Color(r, g, b);
 
         Debug.Log(string.Format("COLOR: {0} {1} {2}", rfrom, gfrom, bfrom));
 
         float waitTime = time;
         float elapsedTime = 0;
 
-        float currR, currG, currB;
-
         while (elapsedTime < waitTime)
         {
 
             float elap = (elapsedTime / waitTime);
-            currR = Mathf.Lerp(rfrom, r, elap);
-            currG = Mathf.Lerp(gfrom, g, elap);
-            currB = Mathf.Lerp(bfrom, b, elap);
+            Color currCol = Color.Lerp(fromColor, toColor, elap);
 
-            lightPanels.SetColor(currR, currG, currB);
+            lightPanels.SetColor(currCol.r, currCol.g, currCol.b);
             elapsedTime += Time.deltaTime;
 
             // Yield here
@@ -125,7 +126,7 @@ public class ScenesManager : MonoBehaviour
 
     }
 
-    private void EverythingOff()
+    public void EverythingOff()
     {
         heaterLeft.slider.value = 0;
         heaterRight.slider.value = 0;

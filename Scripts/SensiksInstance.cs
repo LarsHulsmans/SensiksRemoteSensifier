@@ -329,6 +329,9 @@ public class SensiksInstance : MonoBehaviour
         ceilingActuator.animation = CeilingAnimation.OFF;
         podviewActuators.SetCeilingAnimation(CeilingAnimation.OFF);
 
+        scenesManager.EverythingOff();
+        scenesManager.lightPanels.SetColor(0, 0, 0);
+
         SensiksManager.ResetActuators();
 
 
